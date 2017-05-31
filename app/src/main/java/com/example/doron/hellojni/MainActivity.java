@@ -16,8 +16,12 @@ public class MainActivity extends AppCompatActivity {
         String prop_value_string = "";
         TextView tv = (TextView) findViewById(R.id.sample_text);
 
+        /*
+         * This loop goes through property number 0 untill the last property and concates it
+         * to one string that we will eventually print
+         */
         do {
-            tmp_prop_value_string = stringFromJNI(num);
+            tmp_prop_value_string = getNthFormattedPropValueString(num);
             prop_value_string = prop_value_string + "\n" + tmp_prop_value_string;
             num++;
         } while(!"".equals(tmp_prop_value_string));
@@ -26,10 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
+     * This function returns a prop:value string in the num place
      */
-    public native String stringFromJNI(int num);
+    public native String getNthFormattedPropValueString(int num);
 
     // Used to load the 'native-lib' library on application startup.
     static {
