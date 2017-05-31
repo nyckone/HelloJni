@@ -6,7 +6,8 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_doron_hellojni_MainActivity_stringFromJNI(
         JNIEnv* env,
-        jobject /* this */) {
+        jobject /* this */,
+        jint prop_num) {
     std::string hello = "Hello from C++";
     int n = 0;
     char *name = (char *) malloc(PROP_NAME_MAX * sizeof(char));
@@ -15,7 +16,7 @@ Java_com_example_doron_hellojni_MainActivity_stringFromJNI(
     std::string name_str = "";
     std::string value_str = "";
 
-    const prop_info *prop = __system_property_find_nth(0);
+    const prop_info *prop = __system_property_find_nth(prop_num);
     n = __system_property_read(prop, name, value);
 
     if (0 == n) {
